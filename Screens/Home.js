@@ -8,33 +8,30 @@ import Colors from "../constants/Colors";
 //so instead of passing props into list i can call title directly 
 
 
-const ListButton = ({title,color,onPress,onDelete}) =>{
+const ListButton = ({title,color,onPress,onDelete,onOptions}) =>{
     return(
         <View style={styles.container}>
             <Text>This is the Task Manager Home Page</Text>
             <TouchableOpacity onPress={onPress} style={[styles.itemContainer,{backgroundColor:color}]}>
                 <View><Text style={styles.itemTitle}>{title}</Text></View>
                 <View style={{flexDirection:"row"}}>
-                <TouchableOpacity onPress={() =>{}}>
+                <TouchableOpacity onPress={onOptions}>
                     <Ionicons name="options-outline" size={24} color="white"/>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={onDelete}>
                     <Ionicons name="trash-outline" size={24} color="white"/>
                 </TouchableOpacity>
-                </View>
-                      
+                </View> 
             </TouchableOpacity>
         </View>
     )
-
 }
-const renderAddListIcon= (addItem) => {
+const renderAddListIcon= (navigation, addItemToList) => {
     return(
-        <TouchableOpacity onPress={() => addItem ({title:"Title",color:Colors.green})}>
+        <TouchableOpacity onPress={() => navigation.navigate("Edit", {saveChanges: addItemToList})}>
             <Text styles ={styles.icon}>Add </Text>
         </TouchableOpacity>
-    )
-    
+    )  
 }
 //Use a flat list to render the data list.
 //return the list with useState
@@ -55,9 +52,15 @@ export default({navigation}) =>{
     }
     useLayoutEffect(() => {
         navigation.setOptions({
-            headerRight:() =>  renderAddListIcon(addItemToList)
+            headerRight:() =>  renderAddListIcon(navigation, addItemToList)
         })
     })
+
+    const updateItemFromLists = (index, item) => {
+        lists[index] = item;
+        setList([...lists])
+    }
+
     return(
         <View style = {styles.container}>
         <FlatList
@@ -68,9 +71,17 @@ export default({navigation}) =>{
                  color={color} 
                  navigation={navigation} 
                  onPress={()=>{navigation.navigate("TodoList",{title, color})}}
-                 onDelete={()=> removeItemFromLists(index)}/>
+                 onOptions={()=>{
+                     navigation.navigate(
+                         "Edit",
+                        {
+                        title, color, saveChanges: (item) => updateItemFromLists(index, item)
+                        }
+                    )}
+                }
+                onDelete={()=> removeItemFromLists(index)}
+                 />
              )
-
          }}
          />
         </View>

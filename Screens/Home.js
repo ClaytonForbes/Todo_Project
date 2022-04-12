@@ -11,7 +11,7 @@ import Colors from "../constants/Colors";
 const ListButton = ({title,color,onPress,onDelete,onOptions}) =>{
     return(
         <View style={styles.container}>
-            <Text>This is the Task Manager Home Page</Text>
+            <Text>This is a task that needs to be done.</Text>
             <TouchableOpacity onPress={onPress} style={[styles.itemContainer,{backgroundColor:color}]}>
                 <View><Text style={styles.itemTitle}>{title}</Text></View>
                 <View style={{flexDirection:"row"}}>

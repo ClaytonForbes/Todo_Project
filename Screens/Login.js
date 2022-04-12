@@ -25,12 +25,19 @@ const validateFeilds = (email,password) =>{
     }
     return isValid
 };
-const login = (email,password) =>{};
+const login = (email, password) => {
+    auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(() => {
+            console.log("You are Logged in!");
+        });
+};
+
 const createAccount = (email,password) =>{
     auth().createUserWithEmailAndPassword(email,password)// this returns a promise 
     .then(({user})=>{
         console.log("Creating new user.....");
-    })
+    });
 }  
 
 

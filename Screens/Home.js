@@ -28,9 +28,15 @@ const ListButton = ({title,color,onPress,onDelete,onOptions}) =>{
 }
 const renderAddListIcon= (navigation, addItemToList) => {
     return(
+        <View style={{flexDirection:"row"}}>
+             <TouchableOpacity style={{justifyContent:"center", marginRight:4 }} onPress={() => navigation.navigate("Settings")}>
+        <Ionicons name="settings" size={15} />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate("Edit", {saveChanges: addItemToList})}>
             <Text styles ={styles.icon}>Add </Text>
         </TouchableOpacity>
+       
+        </View>
     )  
 }
 //Use a flat list to render the data list.

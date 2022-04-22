@@ -59,9 +59,13 @@ const renderAddListIcon = (navigation, addItemToList) => {
 //return the list with useState
 export default ({ navigation }) => {
   const [lists, setList] = useState([
-    { title: "School", color: Colors.red },
-    { title: "Work", color: Colors.blue },
-    { title: "Fun", color: Colors.purple },
+    { title: "Open", color: Colors.red },
+    { title: "Planned", color: Colors.blue },
+    { title: "Develop", color: Colors.black },
+    { title: "Testing", color: Colors.green },
+    { title: "Closed", color: Colors.purple },
+    { title: "BackLog", color: Colors.lightGray },
+   
   ]);
   //const listData =[{title:"School", color:Colors.red},{title:"Work", color:Colors.blue},{title:"Fun", color:Colors.green}]
   const addItemToList = (item) => {

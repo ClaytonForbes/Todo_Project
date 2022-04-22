@@ -20,7 +20,7 @@ const AuthScreens = () => {
 }
 const Screens =() =>{
   return(<Stack.Navigator>
-    <Stack.Screen name="C_S_J ToDo" component={Home}/>
+    <Stack.Screen name="C_S_J ClickUP" component={Home}/>
     <Stack.Screen name="Settings" component={Settings}/>
     <Stack.Screen name="TodoList"
      component={TodoList}  
@@ -36,7 +36,7 @@ const Screens =() =>{
      <Stack.Screen name="Edit" component={EditList}
         options={({route})=>{
           return({
-            title: route.params.title ? `Edit ${route.params.title} list` : "Create new list",
+            title: route.params.title ? `Edit ${route.params.title} list` : "Create new Task",
             headerStyle:{
               backgroundColor:route.params.color || Colors.blue
             },

@@ -12,7 +12,7 @@ import Colors from "../constants/Colors";
 import Button from "../components/Button";
 import LabeledInput from "../components/LabeledInput";
 import validator from "validator";
-import { auth } from "firebase";
+import { auth, firestore } from "firebase";
 import * as ImagePicker from "expo-image-picker";
 
 //validates that the email and passwords with certain rules are met using the validator libaray
@@ -32,16 +32,17 @@ const login = (email, password) => {
   auth()
     .signInWithEmailAndPassword(email, password)
     .then(() => {
-      console.log("You are Logged in!");
+      console.log("You are Logged in Welcome!");
     });
 };
 
 const createAccount = (email, password) => {
-  //   auth()
-  //     .createUserWithEmailAndPassword(email, password) // this returns a promise
-  //     .then(({ user }) => {
-  //       console.log("Creating new user.....");
-  //     });
+    auth()
+      .createUserWithEmailAndPassword(email, password) // this returns a promise
+      .then(({ user }) => {
+        console.log("Creating new user.....");
+        firestore().collection("users").doc(user.uid).set({})// this is what we added for 4
+      });
 };
 
 export default () => {
@@ -75,7 +76,7 @@ export default () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>C_J_S_TODO</Text>
+      <Text style={styles.header}>C_J_S_Compass_App</Text>
       <View style={{ flex: 1 }}>
         <LabeledInput
           label="Email"
@@ -186,5 +187,5 @@ const styles = StyleSheet.create({
     alignItems: "stretch",
   },
   label: { fontSize: 20, fontWeight: "bold", color: Colors.black },
-  header: { fontSize: 50, color: Colors.red, alignSelf: "center" },
+  header: { fontSize: 30, color: Colors.blue, alignSelf: "center" },
 });

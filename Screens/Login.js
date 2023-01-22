@@ -76,7 +76,7 @@ export default () => {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>C_J_S_Compass_App</Text>
+      <Text style={styles.header}>C_J_S_To_Do_App</Text>
       <View style={{ flex: 1 }}>
         <LabeledInput
           label="Email"
